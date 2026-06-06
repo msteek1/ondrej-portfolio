@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Design tokens (Tailwind v4 CSS-first config)
+---------------------------------------------------------------------------- */
+@theme {
+  --font-display: "Michroma", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #050608;
+  --color-ink-2: #0a0f16;
+  --color-ink-3: #11161f;
+  --color-accent: #36e0ff;
+  --color-accent-dim: #1b96ad;
+
+  --shadow-glow: 0 0 40px rgba(54, 224, 255, 0.45);
+}
+
+:root {
+  --accent-rgb: 54 224 255;
+}
+
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  background: #050608;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #050608;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+#root { isolation: isolate; }
+
+::selection { background: #36e0ff; color: #050608; }
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid #36e0ff;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: #050608; }
+::-webkit-scrollbar-thumb {
+  background: #143843;
+  border-radius: 5px;
+  border: 2px solid #050608;
+}
+::-webkit-scrollbar-thumb:hover { background: #1b96ad; }
+html { scrollbar-color: #143843 #050608; scrollbar-width: thin; }
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ----------------------------------------------------------------------------
+   Helpers
+---------------------------------------------------------------------------- */
+.text-glow { text-shadow: 0 0 24px rgba(54, 224, 255, 0.55); }
+.drop-legible { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.55); }
+
+/* Subtle perspective grid for the "inside the AI world" sections */
+.digital-grid {
+  background-image:
+    linear-gradient(rgba(54, 224, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(54, 224, 255, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.accent-box { background: #36e0ff; color: #050608; }
+
+/* Hero intro entrance — no fill-mode, so the resting state is always visible
+   (an animation that never runs can never leave the text stuck invisible). */
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(46px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.title-name { animation: heroRise 1s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* Marquee */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee-x linear infinite;
+  will-change: transform;
+}
+
+/* Reduced motion: stop scrubbing jank / decorative motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee-track { animation: none !important; }
+  html { scroll-behavior: auto !important; }
+}
