@@ -5,12 +5,12 @@ import { MANIFESTO, TOOLS } from '../data'
 
 export function Manifesto() {
   return (
-    <section className="relative overflow-hidden py-28 md:py-40">
+    <section className="relative overflow-hidden py-40 md:py-60">
       <div className="pointer-events-none absolute inset-0 digital-grid opacity-[0.25]" />
-      <div className="relative mx-auto max-w-[1200px] px-5 md:px-10">
+      <div className="relative mx-auto max-w-[1280px] px-5 md:px-10">
         <SectionHeading
           kicker="Manifesto"
-          titleClassName="font-display text-[clamp(36px,5.6vw,82px)] uppercase leading-[1.0] tracking-[-0.03em]"
+          titleClassName="font-display text-[clamp(42px,6.4vw,98px)] uppercase leading-[1.0] tracking-[-0.03em]"
           title={
             <>
               Not a shortcut.
@@ -19,7 +19,7 @@ export function Manifesto() {
             </>
           }
         />
-        <RevealText className="mt-16 max-w-[26ch] text-[clamp(22px,3.1vw,42px)] font-medium leading-[1.32] tracking-[-0.01em] text-white">
+        <RevealText className="mt-20 max-w-[24ch] text-[clamp(32px,5vw,72px)] font-medium leading-[1.28] tracking-[-0.01em] text-white">
           {MANIFESTO}
         </RevealText>
       </div>

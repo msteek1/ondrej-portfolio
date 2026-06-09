@@ -26,31 +26,32 @@ export function RevealText({ children, className = '' }: { children: string; cla
 
     const spans = el.querySelectorAll<HTMLElement>('.rw')
     const ctx = gsap.context(() => {
-      gsap.set(spans, { color: 'rgba(255,255,255,0.14)', filter: 'blur(5px)', y: 14 })
+      // No transforms — keep the text perfectly crisp. The wave is purely a moving
+      // colour highlight over always-readable text (grey -> cyan + glow -> white),
+      // so you can read at your own pace and nothing blurs.
+      gsap.set(spans, { color: 'rgb(150,160,172)' })
       gsap.to(spans, {
         keyframes: {
-          // dim → cyan (held across the middle = a ~2-line band) → white
           color: [
-            'rgba(255,255,255,0.14)',
+            'rgb(150,160,172)',
             'rgb(54,224,255)',
             'rgb(54,224,255)',
             'rgb(54,224,255)',
             'rgb(255,255,255)',
           ],
-          filter: ['blur(5px)', 'blur(0px)', 'blur(0px)', 'blur(0px)', 'blur(0px)'],
           textShadow: [
             '0 0 0px rgba(54,224,255,0)',
-            '0 0 26px rgba(54,224,255,0.75)',
-            '0 0 22px rgba(54,224,255,0.6)',
-            '0 0 18px rgba(54,224,255,0.45)',
+            '0 0 22px rgba(54,224,255,0.85)',
+            '0 0 16px rgba(54,224,255,0.55)',
+            '0 0 10px rgba(54,224,255,0.3)',
             '0 0 0px rgba(54,224,255,0)',
           ],
-          y: [14, 0, 0, 0, 0],
           easeEach: 'none',
         },
         ease: 'none',
-        stagger: 0.06,
-        scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 60%', scrub: true },
+        stagger: 0.07,
+        // Slow, gliding highlight across the readable middle of the screen.
+        scrollTrigger: { trigger: el, start: 'top 85%', end: 'bottom 20%', scrub: 1.5 },
       })
     }, el)
     return () => ctx.revert()

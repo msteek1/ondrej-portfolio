@@ -42,8 +42,8 @@ export function Fallback2D() {
           <span className="text-accent text-glow">character board.</span>
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <img src="/boards/hero-board.png" alt="DREW — hero character board" loading="lazy" className="w-full rounded-2xl border border-accent/40 bg-ink-2 shadow-glow" />
-          <img src="/boards/creature-board.png" alt="ZURG — creature board" loading="lazy" className="w-full rounded-2xl border border-[#9b7bff]/40 bg-ink-2" />
+          <img src="/boards/hero-board.webp" alt="DREW — hero character board" loading="lazy" className="w-full rounded-2xl border border-accent/40 bg-ink-2 shadow-glow" />
+          <img src="/boards/creature-board.webp" alt="ZURG — creature board" loading="lazy" className="w-full rounded-2xl border border-[#9b7bff]/40 bg-ink-2" />
         </div>
 
         {/* step — storyboard */}
@@ -52,8 +52,8 @@ export function Fallback2D() {
           <span className="text-accent text-glow">storyboard.</span>
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4">
-          <img src="/boards/storyboard-1.png" alt="Storyboard — sheet 1" loading="lazy" className="w-full rounded-xl border border-white/12 bg-ink-2" />
-          <img src="/boards/storyboard-2.png" alt="Storyboard — sheet 2" loading="lazy" className="w-full rounded-xl border border-white/12 bg-ink-2" />
+          <img src="/boards/storyboard-1.webp" alt="Storyboard — sheet 1" loading="lazy" className="w-full rounded-xl border border-white/12 bg-ink-2" />
+          <img src="/boards/storyboard-2.webp" alt="Storyboard — sheet 2" loading="lazy" className="w-full rounded-xl border border-white/12 bg-ink-2" />
         </div>
 
         {/* closing */}

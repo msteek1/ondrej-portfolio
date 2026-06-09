@@ -99,17 +99,17 @@ export default function CreateScene() {
     })
 
     // step 2 — character boards (real sheets, ~3:4 portrait)
-    const hero = panel(3, 4.2, imageMat('/boards/hero-board.png'), CY)
+    const hero = panel(3, 4.2, imageMat('/boards/hero-board.webp'), CY)
     hero.position.set(-2.55, 0.5, -11); hero.rotation.y = 0.16; scene.add(hero)
-    const crt = panel(3, 4.2, imageMat('/boards/creature-board.png'), PU)
+    const crt = panel(3, 4.2, imageMat('/boards/creature-board.webp'), PU)
     crt.position.set(2.55, 0.5, -11); crt.rotation.y = -0.16; scene.add(crt)
 
     // step 3 — storyboard: two real sheets stacked (≈ a square block of all frames)
     const sbW = 5.6, sbH = (sbW * 9) / 16, gap = 0.45
     const sb = new THREE.Group(); sb.position.set(0, 0.7, -22)
-    const sheet1 = panel(sbW, sbH, imageMat('/boards/storyboard-1.png'), CY)
+    const sheet1 = panel(sbW, sbH, imageMat('/boards/storyboard-1.webp'), CY)
     sheet1.position.set(0, (sbH + gap) / 2, 0); sb.add(sheet1)
-    const sheet2 = panel(sbW, sbH, imageMat('/boards/storyboard-2.png'), PU)
+    const sheet2 = panel(sbW, sbH, imageMat('/boards/storyboard-2.webp'), PU)
     sheet2.position.set(0, -(sbH + gap) / 2, 0); sb.add(sheet2)
     scene.add(sb)
 
