@@ -1,3 +1,4 @@
+import { motion } from 'motion/react'
 import { Mail, ArrowUpRight } from 'lucide-react'
 import { MagneticButton } from './ui/MagneticButton'
 import { LINKS } from '../data'
@@ -29,14 +30,37 @@ export function Contact() {
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
 
       <div className="relative mx-auto max-w-[1100px] px-5 md:px-10">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.25em] text-accent">Let&apos;s talk</span>
-        <h2 className="mt-5 font-display text-[clamp(34px,6vw,90px)] uppercase leading-[0.95] tracking-[-0.03em]">
-          Let&apos;s build
-          <br />
-          something that <span className="text-accent text-glow">compounds.</span>
-        </h2>
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+        >
+          <motion.span
+            variants={{
+              hidden: { opacity: 0, y: 12, filter: 'blur(6px)' },
+              show: { opacity: 1, y: 0, filter: 'blur(0px)' },
+            }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="block text-[11px] font-semibold uppercase tracking-[0.25em] text-accent"
+          >
+            Let&apos;s talk
+          </motion.span>
+          <motion.h2
+            variants={{
+              hidden: { opacity: 0, y: 24, filter: 'blur(12px)' },
+              show: { opacity: 1, y: 0, filter: 'blur(0px)' },
+            }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-5 font-display text-[clamp(38px,6.6vw,100px)] uppercase leading-[0.95] tracking-[-0.03em]"
+          >
+            Let&apos;s build
+            <br />
+            something that <span className="text-accent text-glow">compounds.</span>
+          </motion.h2>
+        </motion.div>
         <p className="mt-7 max-w-[52ch] text-[clamp(15px,1.6vw,19px)] leading-relaxed text-white/60">
-          Marketing strategy, AI workflows, creative systems and automation — connected into something
+          Marketing strategy, AI workflows, creative systems and automation, connected into something
           that&apos;s easier to scale, measure and improve. If that sounds like your kind of problem, let&apos;s
           build it.
         </p>
@@ -87,8 +111,8 @@ export function Contact() {
       </div>
 
       <div className="relative mx-auto mt-24 max-w-[1100px] border-t border-white/10 px-5 pt-8 md:px-10">
-        <div className="flex flex-wrap items-center justify-between gap-4 text-[11px] uppercase tracking-[0.18em] text-white/35">
-          <span>© {year} Ondrej Zuscik — Marketing × AI</span>
+        <div className="flex flex-wrap items-center justify-between gap-4 text-[11px] uppercase tracking-[0.18em] text-white/60">
+          <span>© {year} Ondrej Zuscik · Marketing × AI</span>
           <button onClick={scrollToTop} className="transition-colors hover:text-accent">
             Back to top ↑
           </button>

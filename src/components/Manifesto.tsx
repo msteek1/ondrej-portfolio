@@ -10,6 +10,7 @@ export function Manifesto() {
       <div className="relative mx-auto max-w-[1200px] px-5 md:px-10">
         <SectionHeading
           kicker="Manifesto"
+          titleClassName="font-display text-[clamp(36px,5.6vw,82px)] uppercase leading-[1.0] tracking-[-0.03em]"
           title={
             <>
               Not a shortcut.
@@ -18,7 +19,7 @@ export function Manifesto() {
             </>
           }
         />
-        <RevealText className="mt-12 max-w-[26ch] text-[clamp(22px,3.1vw,42px)] font-medium leading-[1.32] tracking-[-0.01em] text-white">
+        <RevealText className="mt-16 max-w-[26ch] text-[clamp(22px,3.1vw,42px)] font-medium leading-[1.32] tracking-[-0.01em] text-white">
           {MANIFESTO}
         </RevealText>
       </div>

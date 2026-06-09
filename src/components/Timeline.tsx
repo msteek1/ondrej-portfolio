@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { motion, useScroll, useSpring } from 'motion/react'
 import { SectionHeading } from './ui/SectionHeading'
 import { TIMELINE } from '../data'
@@ -7,6 +7,28 @@ export function Timeline() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start 78%', 'end 62%'] })
   const fill = useSpring(scrollYProgress, { stiffness: 90, damping: 30, mass: 0.4 })
+
+  // End the rail exactly at the last node (the goal) — never past it.
+  const [railBottom, setRailBottom] = useState(8)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const calc = () => {
+      const dots = el.querySelectorAll('.tl-dot')
+      if (!dots.length) return
+      const last = dots[dots.length - 1].getBoundingClientRect()
+      const box = el.getBoundingClientRect()
+      const lastCenter = last.top - box.top + last.height / 2
+      setRailBottom(Math.max(0, Math.round(el.clientHeight - lastCenter)))
+    }
+    calc()
+    const t = window.setTimeout(calc, 350)
+    window.addEventListener('resize', calc)
+    return () => {
+      window.clearTimeout(t)
+      window.removeEventListener('resize', calc)
+    }
+  }, [])
 
   return (
     <section id="path" className="relative scroll-mt-24 border-t border-white/5 py-28 md:py-40">
@@ -23,11 +45,14 @@ export function Timeline() {
         />
 
         <div ref={ref} className="relative mt-16">
-          {/* rail */}
-          <div className="absolute bottom-2 top-2 left-[72px] w-px bg-white/12 md:left-[120px]" />
+          {/* rail — ends at the last node (style bottom), never past it */}
+          <div
+            style={{ bottom: railBottom }}
+            className="absolute top-2 left-[94px] w-px bg-white/12 md:left-[152px]"
+          />
           <motion.div
-            style={{ scaleY: fill }}
-            className="absolute bottom-2 top-2 left-[72px] w-px origin-top bg-accent shadow-glow md:left-[120px]"
+            style={{ scaleY: fill, bottom: railBottom }}
+            className="absolute top-2 left-[94px] w-px origin-top bg-accent shadow-glow md:left-[152px]"
           />
 
           <div className="space-y-12 md:space-y-16">
@@ -38,13 +63,13 @@ export function Timeline() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-90px' }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="relative grid grid-cols-[72px_1fr] gap-x-7 md:grid-cols-[120px_1fr] md:gap-x-12"
+                className="relative grid grid-cols-[72px_1fr] gap-x-11 md:grid-cols-[120px_1fr] md:gap-x-16"
               >
                 <div className="pt-1 text-right">
                   <span className="font-display text-[15px] text-white/85 md:text-[19px]">{t.year}</span>
                 </div>
 
-                <span className="absolute top-2 left-[72px] h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-glow ring-4 ring-ink md:left-[120px]" />
+                <span className="tl-dot absolute top-2 left-[94px] h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-glow ring-4 ring-ink md:left-[152px]" />
 
                 <div className="pl-1">
                   {t.tag && (

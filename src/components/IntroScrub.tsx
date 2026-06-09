@@ -17,9 +17,19 @@ const sm = (e0: number, e1: number, x: number) => {
   return x * x * (3 - 2 * x)
 }
 
-const titleBox =
-  'pointer-events-none absolute inset-x-0 bottom-[15vh] z-10 flex flex-col items-center px-[6vw] text-center'
-const beat = 'font-display text-[clamp(34px,5.2vw,90px)] uppercase leading-[1.0] tracking-[-0.03em] max-w-[18ch] drop-legible'
+/* Per-beat placement. The text "drifts" through the world instead of sitting in
+   one spot — each position is chosen to land over a dark / empty area of that
+   specific frame and never cover the subject (see brainstorm placement map).
+   drive() still only animates opacity + a small Y rise on top of these. */
+const boxBase = 'pointer-events-none absolute z-10 flex flex-col px-[6vw]'
+// Full-width bands with internal alignment — so off-center text never overflows
+// the viewport. The text-width cap (on `beat`) keeps line length + mobile safety.
+const posCenter = `${boxBase} inset-0 items-center justify-center text-center` // beat 1
+const posLeft = `${boxBase} inset-0 items-start justify-center text-left` // beat 2
+const posTop = `${boxBase} inset-x-0 top-[12vh] items-center text-center` // beat 3
+const posRight = `${boxBase} inset-0 items-end justify-center text-right` // beats 4 & 6
+const posLowerLeft = `${boxBase} inset-x-0 bottom-[14vh] items-start text-left` // beat 5
+const beat = 'font-display text-[clamp(34px,5.2vw,90px)] uppercase leading-[1.0] tracking-[-0.03em] drop-legible'
 
 export default function IntroScrub() {
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -243,8 +253,8 @@ export default function IntroScrub() {
           }}
         />
 
-        {/* Scene 1 — name (builds line by line) */}
-        <div ref={nameRef} className={titleBox}>
+        {/* Scene 1 — name (builds line by line) — BEAT 1: center */}
+        <div ref={nameRef} className={posCenter}>
           <h1 className="title-name font-display text-[clamp(44px,7vw,120px)] uppercase leading-[0.92] tracking-[-0.035em] drop-legible">
             <span className="block">Hi, my name</span>
             <span ref={nameLine2Ref} className="block opacity-0">
@@ -253,33 +263,36 @@ export default function IntroScrub() {
           </h1>
         </div>
 
-        {/* Scene 1 — tagline (same scale as the name, in cyan) */}
-        <div ref={tagRef} className={`${titleBox} opacity-0`}>
-          <h2 className="font-display text-[clamp(30px,4.9vw,86px)] uppercase leading-[1.02] tracking-[-0.03em] text-accent text-glow max-w-[18ch]">
+        {/* Scene 1 — tagline (cyan) — BEAT 2: left (right side is a bright monitor) */}
+        <div ref={tagRef} className={`${posLeft} opacity-0`}>
+          <h2 className="font-display text-[clamp(30px,4.9vw,86px)] uppercase leading-[1.02] tracking-[-0.03em] text-accent text-glow drop-legible max-w-[54vw]">
             I connect marketing with the power of AI
           </h2>
         </div>
 
-        {/* Scene 1 — finale */}
-        <div ref={end1Ref} className={`${titleBox} opacity-0`}>
-          <h2 className={beat}>
+        {/* Scene 1 — finale — BEAT 3: top (keeps clear of the vortex below) */}
+        <div ref={end1Ref} className={`${posTop} opacity-0`}>
+          <h2 className={`${beat} max-w-[72vw]`}>
             And I love its <span className="text-accent text-glow">endless possibilities</span>
           </h2>
         </div>
 
         {/* Scene 2 — beats */}
-        <div ref={s2aRef} className={`${titleBox} opacity-0`}>
-          <h2 className={beat}>
+        {/* BEAT 4: right (sun glows left, dark sandstorm right) */}
+        <div ref={s2aRef} className={`${posRight} opacity-0`}>
+          <h2 className={`${beat} max-w-[54vw]`}>
             So I set out to <span className="text-accent text-glow">explore them.</span>
           </h2>
         </div>
-        <div ref={s2bRef} className={`${titleBox} opacity-0`}>
-          <h2 className={beat}>
-            A marketer — <span className="text-accent text-glow">reforged by AI.</span>
+        {/* BEAT 5: lower-left (clean desert floor, opposite side from beat 4) */}
+        <div ref={s2bRef} className={`${posLowerLeft} opacity-0`}>
+          <h2 className={`${beat} max-w-[56vw]`}>
+            A marketer, <span className="text-accent text-glow">reforged by AI.</span>
           </h2>
         </div>
-        <div ref={s2cRef} className={`${titleBox} opacity-0`}>
-          <h2 className={beat}>
+        {/* BEAT 6: right + CTA (face is centered; clean right side, cyan visor echoes accent) */}
+        <div ref={s2cRef} className={`${posRight} opacity-0`}>
+          <h2 className={`${beat} max-w-[52vw]`}>
             This is how I <span className="text-accent text-glow">create now.</span>
           </h2>
           <button

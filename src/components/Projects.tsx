@@ -24,7 +24,7 @@ function Card({ p, i, total }: { p: Project; i: number; total: number }) {
               <span className="font-display text-[34px] leading-none md:text-[44px]" style={{ color: accent }}>
                 {p.n}
               </span>
-              <span className="text-[11px] uppercase tracking-[0.2em] text-white/45">{p.kind}</span>
+              <span className="text-[11px] uppercase tracking-[0.2em] text-white/60">{p.kind}</span>
             </div>
             <h3 className="mt-6 font-display text-[clamp(26px,3.4vw,46px)] uppercase tracking-[-0.02em]">
               {p.name}
@@ -51,7 +51,7 @@ function Card({ p, i, total }: { p: Project; i: number; total: number }) {
                 Visit <ArrowUpRight size={16} strokeWidth={2.5} />
               </a>
             )}
-            <span className="mt-6 block text-[12px] uppercase tracking-[0.2em] text-white/30">{p.year}</span>
+            <span className="mt-6 block text-[12px] uppercase tracking-[0.2em] text-white/55">{p.year}</span>
           </div>
 
           <div
@@ -69,7 +69,7 @@ function Card({ p, i, total }: { p: Project; i: number; total: number }) {
               <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
             </div>
-            <div className="absolute bottom-6 right-6 font-mono text-[11px] text-white/30">
+            <div className="absolute bottom-6 right-6 font-mono text-[11px] text-white/55">
               {p.href ? p.href.replace('https://', '').replace(/\/$/, '') : 'internal'}
             </div>
           </div>

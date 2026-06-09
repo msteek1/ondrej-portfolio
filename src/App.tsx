@@ -4,6 +4,7 @@ import { ScrollProgress } from './components/ScrollProgress'
 import { Header } from './components/Header'
 import IntroScrub from './components/IntroScrub'
 import { Manifesto } from './components/Manifesto'
+import { HowICreate } from './components/HowICreate'
 import { Expertise } from './components/Expertise'
 import { Timeline } from './components/Timeline'
 import { Projects } from './components/Projects'
@@ -24,6 +25,7 @@ export default function App() {
         <IntroScrub />
         <div className="relative bg-ink">
           <Manifesto />
+          <HowICreate />
           <Expertise />
           <Timeline />
           <Projects />

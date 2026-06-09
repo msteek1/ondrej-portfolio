@@ -45,7 +45,7 @@ export function Expertise() {
                 </span>
                 <h3 className="font-display text-[17px] uppercase tracking-tight">{e.title}</h3>
                 <p className="mt-3 text-[14.5px] leading-relaxed text-white/55">{e.desc}</p>
-                <span className="mt-6 block font-mono text-[12px] tabular-nums text-white/25">
+                <span className="mt-6 block font-mono text-[12px] tabular-nums text-white/40">
                   0{i + 1}
                 </span>
               </motion.article>

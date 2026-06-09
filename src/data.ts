@@ -7,11 +7,12 @@ export const LINKS = {
   aizona: 'https://aizona.cz',
   advisio: 'https://advisio.cz',
   instagram: 'https://instagram.com/', // TODO: handle
-  email: 'msteek1@gmail.com',
+  email: 'ondra@aizona.cz',
 }
 
 export type NavItem = { id: string; label: string }
 export const NAV: NavItem[] = [
+  { id: 'create', label: 'How I create' },
   { id: 'work', label: 'What I do' },
   { id: 'path', label: 'Path' },
   { id: 'projects', label: 'Projects' },
@@ -20,7 +21,7 @@ export const NAV: NavItem[] = [
 
 /* ---- Manifesto ---- */
 export const MANIFESTO =
-  "I don't use AI just to generate nice visuals. I build systems that help teams move faster, test more, and turn ideas into measurable output. For me, AI is not a shortcut around good marketing — it's a multiplier for people who understand strategy, context and execution."
+  "I don't use AI just to generate nice visuals. I build systems that help teams move faster, test more, and turn ideas into output you can measure. AI doesn't replace good marketing. It multiplies the knowledge of the people who already understand strategy, context and execution."
 
 /* ---- Career timeline ---- */
 export type TimelineEntry = {
@@ -33,13 +34,6 @@ export type TimelineEntry = {
 }
 
 export const TIMELINE: TimelineEntry[] = [
-  {
-    year: '2014',
-    role: 'Gymnázium EDUCAnet',
-    org: 'Ostrava',
-    blurb: 'High school — Sociology & IT. Where the curiosity for systems and people started.',
-    tag: 'Education',
-  },
   {
     year: '2016',
     role: 'Digital Data Specialist',
@@ -60,7 +54,7 @@ export const TIMELINE: TimelineEntry[] = [
     role: 'Affiliate Marketing',
     org: 'Self-employed',
     blurb:
-      'Built and ran affiliate campaigns across social, Google Ads and RTB. Learned performance the hard way — on my own P&L.',
+      'Built and ran affiliate campaigns across social, Google Ads and RTB. Learned performance the hard way. On my own P&L.',
   },
   {
     year: '2024',
@@ -76,7 +70,7 @@ export const TIMELINE: TimelineEntry[] = [
     role: 'Founder',
     org: 'Aizona.cz',
     blurb:
-      'Building an AI magazine and practical knowledge hub — real use cases, workflows and an AI Academy for everyday work.',
+      'Building an AI magazine and practical knowledge hub: real use cases, workflows and an AI Academy for everyday work.',
     tag: 'Building',
   },
 ]
@@ -112,7 +106,7 @@ export const EXPERTISE: Expertise[] = [
   },
   {
     title: 'Vibe Coding',
-    desc: 'Practical AI implementation — prototypes, internal tools and the glue that ships ideas.',
+    desc: 'Practical AI implementation: prototypes, internal tools and the glue that ships ideas.',
     icon: 'Code2',
   },
 ]
@@ -135,7 +129,7 @@ export const PROJECTS: Project[] = [
     name: 'Aizona.cz',
     kind: 'Founder · AI Magazine',
     year: '2025',
-    desc: 'A Czech AI magazine and knowledge hub — "everything essential from the world of AI in one place." News, real use cases, workflows and an AI Academy across marketing, creativity, productivity and automation.',
+    desc: 'A Czech AI magazine and knowledge hub: "everything essential from the world of AI in one place." News, real use cases, workflows and an AI Academy across marketing, creativity, productivity and automation.',
     tags: ['Content', 'Brand', 'AI Education', 'Product'],
     href: 'https://aizona.cz',
     accent: '#36e0ff',
@@ -144,7 +138,7 @@ export const PROJECTS: Project[] = [
     n: '02',
     name: 'Advisio.cz',
     kind: 'Account Manager',
-    year: '2024 — Now',
+    year: '2024–Now',
     desc: 'Leading client strategy and growth for e-commerce and service brands. Coordinating PPC, paid social, RTB and AI-assisted creative production, backed by GA4 + Looker Studio reporting.',
     tags: ['Strategy', 'PPC', 'Paid Social', 'Reporting'],
     href: 'https://advisio.cz',
@@ -164,7 +158,7 @@ export const PROJECTS: Project[] = [
     name: 'Creative Lab',
     kind: 'Instagram · AI visuals',
     year: 'Ongoing',
-    desc: 'An ongoing playground of AI-driven visuals and short-form concepts — testing where generative tooling actually earns its place in real marketing.',
+    desc: 'An ongoing playground of AI-driven visuals and short-form concepts, testing where generative tooling actually earns its place in real marketing.',
     tags: ['Visual', 'Short-form', 'Experiments'],
     href: 'https://instagram.com/',
     accent: '#36e0ff',

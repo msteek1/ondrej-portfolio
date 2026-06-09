@@ -17,7 +17,7 @@ export function Marquee({
         {[...items, ...items].map((t, i) => (
           <span
             key={i}
-            className="mx-6 inline-flex items-center gap-4 font-display text-[clamp(16px,2.2vw,30px)] uppercase tracking-tight text-white/25"
+            className="mx-6 inline-flex items-center gap-4 font-display text-[clamp(16px,2.2vw,30px)] uppercase tracking-tight text-white/40"
           >
             {t}
             <span className="text-accent/70">/</span>

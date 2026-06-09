@@ -40,7 +40,7 @@ export function Header() {
           </span>
           <span className="hidden text-left leading-tight sm:block">
             <span className="block font-display text-[13px] uppercase tracking-[0.04em]">Ondrej Zuscik</span>
-            <span className="block text-[10px] uppercase tracking-[0.2em] text-white/45">Marketing × AI</span>
+            <span className="block text-[10px] uppercase tracking-[0.2em] text-white/55">Marketing × AI</span>
           </span>
         </button>
 
