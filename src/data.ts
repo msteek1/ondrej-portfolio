@@ -19,6 +19,45 @@ export const NAV: NavItem[] = [
   { id: 'contact', label: 'Contact' },
 ]
 
+/* ---- Story chapters ----
+   The page reads as one continuous first-person story. Each chapter break
+   carries the thread between sections: numeral, chapter name, and one line
+   of narration connecting what came before to what follows. */
+export type Chapter = { n: string; name: string; line: string }
+
+export const CHAPTERS: Record<'manifesto' | 'create' | 'work' | 'path' | 'projects' | 'contact', Chapter> = {
+  manifesto: {
+    n: '01',
+    name: 'Why',
+    line: 'Before I show you anything, you should know what I believe.',
+  },
+  create: {
+    n: '02',
+    name: 'The craft',
+    line: 'Easier shown than told — this is how a film gets made.',
+  },
+  work: {
+    n: '03',
+    name: 'The toolkit',
+    line: 'One film is a nice trick. The system behind it is the real work.',
+  },
+  path: {
+    n: '04',
+    name: 'The road',
+    line: 'None of this happened overnight.',
+  },
+  projects: {
+    n: '05',
+    name: 'The proof',
+    line: "Enough about how. Here's what it builds.",
+  },
+  contact: {
+    n: '06',
+    name: 'Your move',
+    line: "That's my story so far. The next chapter has room for a co-author.",
+  },
+}
+
 /* ---- Manifesto ---- */
 export const MANIFESTO =
   "I don't use AI just to generate nice visuals. I build systems that help teams move faster, test more, and turn ideas into output you can measure. AI doesn't replace good marketing. It multiplies the knowledge of the people who already understand strategy, context and execution."
@@ -121,6 +160,9 @@ export type Project = {
   tags: string[]
   href?: string
   accent?: string
+  /** real artifact shown on the card (screenshot / creative); falls back to the monogram panel */
+  media?: string
+  mediaAlt?: string
 }
 
 export const PROJECTS: Project[] = [
@@ -133,6 +175,8 @@ export const PROJECTS: Project[] = [
     tags: ['Content', 'Brand', 'AI Education', 'Product'],
     href: 'https://aizona.cz',
     accent: '#36e0ff',
+    media: '/shots/aizona.webp',
+    mediaAlt: 'Aizona.cz — homepage of the Czech AI magazine',
   },
   {
     n: '02',
@@ -143,6 +187,8 @@ export const PROJECTS: Project[] = [
     tags: ['Strategy', 'PPC', 'Paid Social', 'Reporting'],
     href: 'https://advisio.cz',
     accent: '#ff6a3d',
+    media: '/shots/advisio.webp',
+    mediaAlt: 'Advisio.cz — digital marketing agency homepage',
   },
   {
     n: '03',

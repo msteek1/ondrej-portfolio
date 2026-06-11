@@ -15,10 +15,9 @@ const ICONS: Record<string, ComponentType<{ size?: number; strokeWidth?: number 
 
 export function Expertise() {
   return (
-    <section id="work" className="relative scroll-mt-24 border-t border-white/5 py-28 md:py-40">
+    <section id="work" className="relative scroll-mt-24 pt-14 pb-28 md:pt-16 md:pb-40">
       <div className="mx-auto max-w-[1300px] px-5 md:px-10">
         <SectionHeading
-          kicker="What I do"
           title={
             <>
               The work,

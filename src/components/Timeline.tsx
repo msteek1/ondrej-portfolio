@@ -31,10 +31,9 @@ export function Timeline() {
   }, [])
 
   return (
-    <section id="path" className="relative scroll-mt-24 border-t border-white/5 py-28 md:py-40">
+    <section id="path" className="relative scroll-mt-24 pt-14 pb-28 md:pt-16 md:pb-40">
       <div className="mx-auto max-w-[1100px] px-5 md:px-10">
         <SectionHeading
-          kicker="Path"
           title={
             <>
               Seven years,
@@ -52,7 +51,7 @@ export function Timeline() {
           />
           <motion.div
             style={{ scaleY: fill, bottom: railBottom }}
-            className="absolute top-2 left-[94px] w-px origin-top bg-accent shadow-glow md:left-[152px]"
+            className="absolute top-2 left-[94px] w-px origin-top bg-accent md:left-[152px]"
           />
 
           <div className="space-y-12 md:space-y-16">
@@ -69,7 +68,7 @@ export function Timeline() {
                   <span className="font-display text-[15px] text-white/85 md:text-[19px]">{t.year}</span>
                 </div>
 
-                <span className="tl-dot absolute top-2 left-[94px] h-3 w-3 -translate-x-1/2 rounded-full bg-accent shadow-glow ring-4 ring-ink md:left-[152px]" />
+                <span className="tl-dot absolute top-2 left-[94px] h-3 w-3 -translate-x-1/2 rounded-full bg-accent ring-4 ring-ink md:left-[152px]" />
 
                 <div className="pl-1">
                   {t.tag && (

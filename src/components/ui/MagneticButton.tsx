@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import type { ReactNode, MouseEvent as ReactMouseEvent } from 'react'
+import type { ReactNode, Ref, MouseEvent as ReactMouseEvent } from 'react'
 
 type Props = {
   children: ReactNode
@@ -35,7 +35,7 @@ export function MagneticButton({ children, href, onClick, className = '', streng
     const external = href.startsWith('http')
     return (
       <a
-        ref={ref as any}
+        ref={ref as Ref<HTMLAnchorElement>}
         href={href}
         aria-label={ariaLabel}
         onMouseMove={move}
@@ -51,7 +51,7 @@ export function MagneticButton({ children, href, onClick, className = '', streng
 
   return (
     <button
-      ref={ref as any}
+      ref={ref as Ref<HTMLButtonElement>}
       type="button"
       aria-label={ariaLabel}
       onClick={onClick}

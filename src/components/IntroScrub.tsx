@@ -44,6 +44,7 @@ export default function IntroScrub() {
   const s2cRef = useRef<HTMLDivElement>(null)
   const flashRef = useRef<HTMLDivElement>(null)
   const scrimRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
   const hintRef = useRef<HTMLDivElement>(null)
   const loaderRef = useRef<HTMLDivElement>(null)
   const barRef = useRef<HTMLDivElement>(null)
@@ -63,7 +64,11 @@ export default function IntroScrub() {
     let st: ScrollTrigger | null = null
     let targetP = 0
     let loaderHidden = false
-    const renderState: { arr: HTMLImageElement[] | null; fIndex: number } = { arr: null, fIndex: 0 }
+    const renderState: { arr: HTMLImageElement[] | null; fIndex: number; dis: number } = {
+      arr: null,
+      fIndex: 0,
+      dis: 0,
+    }
 
     const isReady = (img?: HTMLImageElement) => !!img && img.complete && img.naturalWidth > 0
 
@@ -96,9 +101,16 @@ export default function IntroScrub() {
       ctx.globalAlpha = 1
     }
 
+    // Offscreen buffer for the closing "pixel dissolve" match-cut.
+    const off = document.createElement('canvas')
+    const octx = off.getContext('2d')!
+
     // Render a *fractional* frame by blending the two nearest frames together.
     // This turns a ~12fps sequence into visually smooth motion.
-    const renderFrame = (arr: HTMLImageElement[], fIndex: number) => {
+    // `dis` (0..1) is the match-cut: the image breaks up into a coarse mosaic
+    // and sinks toward ink while the digital grid fades in over it — the
+    // filmed world literally dissolving into the site's digital surface.
+    const renderFrame = (arr: HTMLImageElement[], fIndex: number, dis = 0) => {
       const i0 = Math.floor(fIndex)
       const i1 = Math.min(i0 + 1, arr.length - 1)
       const t = fIndex - i0
@@ -108,11 +120,25 @@ export default function IntroScrub() {
       ctx.fillRect(0, 0, canvas.width, canvas.height)
       drawCover(img0, 1)
       if (t > 0.02 && isReady(arr[i1])) drawCover(arr[i1], t)
+      if (dis > 0.01) {
+        const block = 2 + dis * 46
+        const ow = Math.max(1, Math.floor(canvas.width / block))
+        const oh = Math.max(1, Math.floor(canvas.height / block))
+        off.width = ow
+        off.height = oh
+        octx.drawImage(canvas, 0, 0, ow, oh)
+        ctx.imageSmoothingEnabled = false
+        ctx.drawImage(off, 0, 0, ow, oh, 0, 0, canvas.width, canvas.height)
+        ctx.imageSmoothingEnabled = true
+        ctx.fillStyle = `rgba(5,6,8,${0.88 * dis})`
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+      }
       renderState.arr = arr
       renderState.fIndex = fIndex
+      renderState.dis = dis
     }
     const redraw = () => {
-      if (renderState.arr) renderFrame(renderState.arr, renderState.fIndex)
+      if (renderState.arr) renderFrame(renderState.arr, renderState.fIndex, renderState.dis)
     }
 
     const setStyle = (el: HTMLElement | null, opacity: number, ty: number) => {
@@ -128,13 +154,17 @@ export default function IntroScrub() {
       // Frame mapping with an end-hold per scene so the climactic frame
       // (vortex arrival / cyan mask) is reached *before* the scroll ends and
       // then holds while the final title + CTA are read.
+      // Match-cut into the next chapter: the held final frame pixel-dissolves
+      // while the digital grid (same surface the page continues on) fades in.
+      const dis = sm(0.945, 1, p)
       if (p < 0.49) {
         const aF = clamp(a / 0.9, 0, 1) // reach last hero frame at a=0.9, hold to 1.0
         renderFrame(s1, aF * (N1 - 1))
       } else {
         const bF = clamp(b / 0.82, 0, 1) // reach last frontier frame at b=0.82, hold to 1.0
-        renderFrame(s2, bF * (N2 - 1))
+        renderFrame(s2, bF * (N2 - 1), dis)
       }
+      if (gridRef.current) gridRef.current.style.opacity = String(dis * 0.25)
 
       if (flashRef.current)
         flashRef.current.style.opacity = String(sm(0.44, 0.5, p) * (1 - sm(0.5, 0.57, p)))
@@ -252,6 +282,9 @@ export default function IntroScrub() {
               'radial-gradient(circle at 50% 45%, #cffaff 0%, #36e0ff 35%, #0a3a4a 75%, #050608 100%)',
           }}
         />
+        {/* Match-cut surface: fades in as the final frame dissolves, then the
+            page below continues on the very same grid. */}
+        <div ref={gridRef} className="pointer-events-none absolute inset-0 digital-grid opacity-0" />
 
         {/* Scene 1 — name (builds line by line) — BEAT 1: center */}
         <div ref={nameRef} className={posCenter}>
@@ -265,7 +298,7 @@ export default function IntroScrub() {
 
         {/* Scene 1 — tagline (cyan) — BEAT 2: left (right side is a bright monitor) */}
         <div ref={tagRef} className={`${posLeft} opacity-0`}>
-          <h2 className="font-display text-[clamp(30px,4.9vw,86px)] uppercase leading-[1.02] tracking-[-0.03em] text-accent text-glow drop-legible max-w-[54vw]">
+          <h2 className="font-display text-[clamp(30px,4.9vw,86px)] uppercase leading-[1.02] tracking-[-0.03em] text-accent drop-legible max-w-[54vw]">
             I connect marketing with the power of AI
           </h2>
         </div>
@@ -273,7 +306,7 @@ export default function IntroScrub() {
         {/* Scene 1 — finale — BEAT 3: top (keeps clear of the vortex below) */}
         <div ref={end1Ref} className={`${posTop} opacity-0`}>
           <h2 className={`${beat} max-w-[72vw]`}>
-            And I love its <span className="text-accent text-glow">endless possibilities</span>
+            And I love its <span className="text-accent">endless possibilities</span>
           </h2>
         </div>
 
@@ -281,13 +314,13 @@ export default function IntroScrub() {
         {/* BEAT 4: right (sun glows left, dark sandstorm right) */}
         <div ref={s2aRef} className={`${posRight} opacity-0`}>
           <h2 className={`${beat} max-w-[54vw]`}>
-            So I set out to <span className="text-accent text-glow">explore them.</span>
+            So I set out to <span className="text-accent">explore them.</span>
           </h2>
         </div>
         {/* BEAT 5: lower-left (clean desert floor, opposite side from beat 4) */}
         <div ref={s2bRef} className={`${posLowerLeft} opacity-0`}>
           <h2 className={`${beat} max-w-[56vw]`}>
-            A marketer, <span className="text-accent text-glow">reforged by AI.</span>
+            A marketer, <span className="text-accent">reforged by AI.</span>
           </h2>
         </div>
         {/* BEAT 6: right + CTA (face is centered; clean right side, cyan visor echoes accent) */}
@@ -320,7 +353,7 @@ export default function IntroScrub() {
             Loading the world… <span ref={pctRef}>0</span>%
           </div>
           <div className="h-px w-64 overflow-hidden bg-white/10">
-            <div ref={barRef} className="h-full bg-accent shadow-glow" style={{ width: '0%' }} />
+            <div ref={barRef} className="h-full bg-accent" style={{ width: '0%' }} />
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export function Fallback2D() {
         />
 
         {/* the finished video */}
-        <div className="mt-12 overflow-hidden rounded-2xl border border-accent/40 shadow-glow">
+        <div className="mt-12 overflow-hidden rounded-2xl border border-accent/40">
           <video
             src="/proweb.mp4"
             controls
@@ -39,17 +39,17 @@ export function Fallback2D() {
         {/* step — characters */}
         <p className="mt-24 max-w-[24ch] font-display text-[clamp(22px,3vw,40px)] uppercase leading-[1.15] tracking-[-0.02em]">
           First, you design your characters and create a prompt for a{' '}
-          <span className="text-accent text-glow">character board.</span>
+          <span className="text-accent">character board.</span>
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <img src="/boards/hero-board.webp" alt="DREW — hero character board" loading="lazy" className="w-full rounded-2xl border border-accent/40 bg-ink-2 shadow-glow" />
+          <img src="/boards/hero-board.webp" alt="DREW — hero character board" loading="lazy" className="w-full rounded-2xl border border-accent/40 bg-ink-2" />
           <img src="/boards/creature-board.webp" alt="ZURG — creature board" loading="lazy" className="w-full rounded-2xl border border-[#9b7bff]/40 bg-ink-2" />
         </div>
 
         {/* step — storyboard */}
         <p className="mt-24 max-w-[26ch] font-display text-[clamp(22px,3vw,40px)] uppercase leading-[1.15] tracking-[-0.02em]">
           Then you design the story, each frame per beat, and prepare a{' '}
-          <span className="text-accent text-glow">storyboard.</span>
+          <span className="text-accent">storyboard.</span>
         </p>
         <div className="mt-8 grid grid-cols-1 gap-4">
           <img src="/boards/storyboard-1.webp" alt="Storyboard — sheet 1" loading="lazy" className="w-full rounded-xl border border-white/12 bg-ink-2" />
@@ -58,7 +58,7 @@ export function Fallback2D() {
 
         {/* closing */}
         <p className="mt-24 max-w-[22ch] font-display text-[clamp(22px,3vw,40px)] uppercase leading-[1.15] tracking-[-0.02em]">
-          Now you have to <span className="text-accent text-glow">prompt it all together.</span>
+          Now you have to <span className="text-accent">prompt it all together.</span>
         </p>
         <h3 className="mt-10 font-display text-[clamp(34px,6vw,84px)] uppercase leading-[1.0] tracking-[-0.03em]">
           That&apos;s <span className="text-accent text-glow">the work.</span>

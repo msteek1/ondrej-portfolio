@@ -25,7 +25,7 @@ function InstagramIcon({ className }: { className?: string }) {
 export function Contact() {
   const year = new Date().getFullYear()
   return (
-    <section id="contact" className="relative scroll-mt-24 overflow-hidden border-t border-white/5 py-28 md:py-44">
+    <section id="contact" className="relative scroll-mt-24 overflow-hidden pt-14 pb-28 md:pt-16 md:pb-44">
       <div className="pointer-events-none absolute inset-0 digital-grid opacity-30" />
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px]" />
 

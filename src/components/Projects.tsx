@@ -16,7 +16,7 @@ function Card({ p, i, total }: { p: Project; i: number; total: number }) {
     <div ref={ref} className="sticky top-0 flex h-screen items-center justify-center">
       <motion.article
         style={{ scale, top: `calc(-6vh + ${i * 24}px)` }}
-        className="relative w-full max-w-[1080px] overflow-hidden rounded-[28px] border border-white/12 bg-ink-2"
+        className="group relative w-full max-w-[1080px] overflow-hidden rounded-[28px] border border-white/12 bg-ink-2"
       >
         <div className="grid md:grid-cols-[1.05fr_0.95fr]">
           <div className="p-8 md:p-12">
@@ -58,18 +58,36 @@ function Card({ p, i, total }: { p: Project; i: number; total: number }) {
             className="relative min-h-[240px] overflow-hidden"
             style={{ background: `radial-gradient(120% 120% at 70% 18%, ${accent}22, transparent 60%), #070b11` }}
           >
-            <div className="absolute inset-0 digital-grid opacity-40" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-display text-[clamp(60px,10vw,150px)] uppercase leading-none opacity-[0.12]">
-                {p.name.charAt(0)}
-              </span>
-            </div>
+            {p.media ? (
+              <>
+                <img
+                  src={p.media}
+                  alt={p.mediaAlt ?? p.name}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                />
+                {/* bottom scrim keeps the url label readable over the artifact */}
+                <div
+                  className="pointer-events-none absolute inset-0"
+                  style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(7,11,17,0.85) 100%)' }}
+                />
+              </>
+            ) : (
+              <>
+                <div className="absolute inset-0 digital-grid opacity-40" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="font-display text-[clamp(60px,10vw,150px)] uppercase leading-none opacity-[0.12]">
+                    {p.name.charAt(0)}
+                  </span>
+                </div>
+              </>
+            )}
             <div className="absolute left-6 top-6 flex gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full" style={{ background: accent }} />
               <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
             </div>
-            <div className="absolute bottom-6 right-6 font-mono text-[11px] text-white/55">
+            <div className="absolute bottom-6 right-6 font-mono text-[11px] text-white/75">
               {p.href ? p.href.replace('https://', '').replace(/\/$/, '') : 'internal'}
             </div>
           </div>
@@ -81,10 +99,9 @@ function Card({ p, i, total }: { p: Project; i: number; total: number }) {
 
 export function Projects() {
   return (
-    <section id="projects" className="relative scroll-mt-24 border-t border-white/5 pt-28 md:pt-40">
+    <section id="projects" className="relative scroll-mt-24 pt-14 md:pt-16">
       <div className="mx-auto max-w-[1300px] px-5 md:px-10">
         <SectionHeading
-          kicker="Projects"
           title={
             <>
               Selected

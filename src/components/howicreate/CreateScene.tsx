@@ -256,7 +256,7 @@ export default function CreateScene() {
         {/* play with sound */}
         <button
           ref={playRef}
-          className="play-cta absolute left-1/2 top-[42%] z-20 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 rounded-full border border-accent/60 bg-ink/45 px-5 py-3.5 text-[14px] font-bold tracking-[0.04em] opacity-0 shadow-glow backdrop-blur transition"
+          className="play-cta absolute left-1/2 top-[42%] z-20 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 rounded-full border border-accent/60 bg-ink/45 px-5 py-3.5 text-[14px] font-bold tracking-[0.04em] opacity-0 backdrop-blur transition"
         >
           <span className="inline-block border-y-[8px] border-l-[13px] border-y-transparent border-l-accent" /> Play with sound
         </button>
